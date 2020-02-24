@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, NavigationStart, NavigationEnd, NavigationCancel, NavigationError, Event } from '@angular/router';
 
 @Component({
@@ -6,15 +6,16 @@ import { Router, NavigationStart, NavigationEnd, NavigationCancel, NavigationErr
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   public loading: boolean = false;
 
   constructor(
     private router: Router
-  ) {
+  ) { }
 
+  public ngOnInit(): void {
+    this.loader();
   }
-
   private loader() {
     this.router.events.subscribe((event: Event) => {
       switch (true) {
@@ -34,6 +35,6 @@ export class AppComponent {
           break;
         }
       }
-    })
+    });
   }
 }
